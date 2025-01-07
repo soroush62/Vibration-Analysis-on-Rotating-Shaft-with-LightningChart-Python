@@ -181,7 +181,8 @@ Logarithmic histograms visualize the binned distribution of vibration amplitudes
 
 **Results:**
 - Most vibration values are concentrated in lower amplitude ranges, with a steep decline in frequency for higher values.
-- Sensor 3 records significantly higher amplitudes compared to Sensors 1 and 2.
+- The distributions for Vibration_1 and Vibration_2 show a similar pattern, with the highest counts in a specific mid-range bin.
+- Vibration_3 appears to have a higher concentration in one particular bin compared to the other two columns, suggesting unique behavior in that sensor.
 
 **Use Cases:**
 - **Amplitude Analysis:** Understand the distribution of vibration intensities for fault diagnosis.
@@ -231,6 +232,8 @@ A spectrogram-based heatmap correlates vibration frequencies with rotation speed
 **Results:**
 - Dominant frequencies align with specific RPM ranges, indicating resonance points.
 - High amplitudes appear as streaks on the heatmap, highlighting critical vibration zones.
+- Background areas in blue and cyan indicate minimal vibration amplitudes at those frequencies and speeds.
+- The slanted yellow/red lines indicate that specific frequency components are correlated with increasing rotation speed.
 
 **Use Cases:**
 - **Frequency Analysis:** Detect resonant frequencies to avoid structural damage.
