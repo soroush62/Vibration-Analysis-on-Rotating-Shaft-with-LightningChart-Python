@@ -59,7 +59,7 @@ source rf_analysis_env/bin/activate  # On Windows: rf_analysis_env\Scripts\activ
 ## **Loading and Processing Data**
 
 ### **How to Load the Data Files**
-The dataset consists of CSV files named according to their unbalance strength (e.g., `0D.csv`, `1D.csv`)[Link to dataset : ](https://www.kaggle.com/datasets/jishnukoliyadan/vibration-analysis-on-rotating-shaft). Each file contains the following columns:
+The dataset consists of CSV files named according to their unbalance strength (e.g., `0D.csv`, `1D.csv`)([Link to dataset])(https://www.kaggle.com/datasets/jishnukoliyadan/vibration-analysis-on-rotating-shaft). Each file contains the following columns:
 1. `V_in`: Input voltage to the motor controller.
 2. `Measured_RPM`: Rotational speed of the shaft.
 3. `Vibration_1`, `Vibration_2`, `Vibration_3`: Signals from the vibration sensors.
