@@ -157,6 +157,7 @@ This line chart visualizes the variation of vibration intensity and measured RPM
 - Most vibration intensity happens at the beggining of experiment. 
 - Vibration intensity decreases sharply as RPM stabilizes, especially for higher unbalance datasets.
 - The chart highlights the synchronization between RPM and vibration fluctuations.
+- The RPM steadily increases over time with occasional resets, reflecting the controlled ramp-up during testing.
 
 **Use Cases:**
 - **Fault Detection:** Identify abnormal vibration patterns at specific RPM ranges.
