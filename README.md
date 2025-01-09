@@ -1,3 +1,4 @@
+![](Images/HsPYOgf.jpg)  
 # **Vibration Analysis on Rotating Shaft with LightningChart Python**
 
 ## **What is Vibration Analysis?**
