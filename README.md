@@ -59,7 +59,7 @@ source rf_analysis_env/bin/activate  # On Windows: rf_analysis_env\Scripts\activ
 ## **Loading and Processing Data**
 
 ### **How to Load the Data Files**
-The dataset consists of CSV files named according to their unbalance strength (e.g., `0D.csv`, `1D.csv`)([Link to dataset](https://www.kaggle.com/datasets/jishnukoliyadan/vibration-analysis-on-rotating-shaft)). Each file contains the following columns:
+The dataset consists of CSV files named according to their unbalance strength and each file consists of more than 20 million rows (e.g., `0D.csv`, `1D.csv`)([Link to dataset](https://www.kaggle.com/datasets/jishnukoliyadan/vibration-analysis-on-rotating-shaft)). Each file contains the following columns:
 1. `V_in`: Input voltage to the motor controller.
 2. `Measured_RPM`: Rotational speed of the shaft.
 3. `Vibration_1`, `Vibration_2`, `Vibration_3`: Signals from the vibration sensors.
@@ -154,8 +154,10 @@ chart_rpm_vibration.get_default_y_axis().set_title('Vibration Intensity')
 This line chart visualizes the variation of vibration intensity and measured RPM over time for all datasets. The chart uses separate Y-axes to compare vibration amplitudes (`Vibration_1`, `Vibration_2`, `Vibration_3`) with RPM.
 
 **Results:**
+- Most vibration intensity happens at the beggining of experiment. 
 - Vibration intensity decreases sharply as RPM stabilizes, especially for higher unbalance datasets.
 - The chart highlights the synchronization between RPM and vibration fluctuations.
+- The RPM steadily increases over time with occasional resets, reflecting the controlled ramp-up during testing.
 
 **Use Cases:**
 - **Fault Detection:** Identify abnormal vibration patterns at specific RPM ranges.
@@ -163,12 +165,18 @@ This line chart visualizes the variation of vibration intensity and measured RPM
 
 **Script Summary:**
 ```python
-chart_rpm_vibration = dashboard.ChartXY(row_index=1, column_index=0, column_span=2, title='Impact of Unbalance on Vibration (Sensor 1)')
-for key, group in grouped_data.items():
-    series = chart_rpm_vibration.add_line_series()
-    series.add(group['Measured_RPM'].tolist(), group['Vibration_1'].tolist())
-chart_rpm_vibration.get_default_x_axis().set_title('RPM')
-chart_rpm_vibration.get_default_y_axis().set_title('Vibration Intensity')
+chart = lc.ChartXY(title="Time Series Analysis of Vibration and RPM", theme=lc.Themes.Light)
+x_axis = chart.get_default_x_axis().set_title("Time (Index)").set_interval(0, len(data_normalized_100), stop_axis_after=True)
+chart.get_default_y_axis().dispose()  # Remove default Y-axis
+
+legend = chart.add_legend()
+for i, sensor in enumerate(['Vibration_1', 'Vibration_2', 'Vibration_3', 'Measured_RPM']):
+    y_axis = chart.add_y_axis(stack_index=i).set_title(sensor)
+    if sensor in ['Vibration_1', 'Vibration_2', 'Vibration_3']:
+        y_axis.set_interval(-0.15, 0.15, stop_axis_after=True)
+    series = chart.add_line_series(y_axis=y_axis, data_pattern='ProgressiveX')
+    series.add(x=list(range(len(data_normalized_100))), y=data_normalized_100[sensor].tolist())
+    legend.add(series)
 ```
 
 ![](Images/Time_Series_Analysis_of_Vibration_and_RPM.png)  
